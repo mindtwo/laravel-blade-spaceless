@@ -1,0 +1,31 @@
+{
+    "name": "mindtwo/laravel-blade-spaceless",
+    "description": "Spaceless Blade Directive",
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "mindtwo GmbH",
+            "email": "info@mindtwo.de",
+            "homepage": "https://www.mindtwo.de/",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "illuminate/support": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "mindtwo\\Spaceless\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "mindtwo\\Spaceless\\SpacelessServiceProvider"
+            ]
+        }
+    }
+}
