@@ -1,7 +1,8 @@
 # Spaceless Larvel Blade Directive
-[![Latest Stable Version](https://poser.pugx.org/mindtwo/laravel-blade-spaceless/v/stable)](https://packagist.org/packages/mindtwo/laravel-blade-spaceless)
-[![Total Downloads](https://poser.pugx.org/mindtwo/laravel-blade-spaceless/downloads)](https://packagist.org/packages/mindtwo/laravel-blade-spaceless)
-[![License](https://poser.pugx.org/mindtwo/laravel-blade-spaceless/license)](https://packagist.org/packages/mindtwo/laravel-blade-spaceless)
+[![Latest Stable Version](https://img.shields.io/packagist/v/mindtwo/laravel-blade-spaceless?style=flat-square)](https://packagist.org/packages/mindtwo/laravel-blade-spaceless)
+[![Total Downloads](https://img.shields.io/packagist/dt/mindtwo/laravel-blade-spaceless?style=flat-square)](https://packagist.org/packages/mindtwo/laravel-blade-spaceless)
+[![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
+
 
 ## Installation
 
