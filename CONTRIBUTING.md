@@ -2,22 +2,30 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/mindtwo/laravel-blade-spaceless).
+We accept contributions via Pull Requests on [GitHub](https://github.com/mindtwo/laravel-blade-spaceless).
 
 ## Pull Requests
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
-- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
-- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
-- **Create feature branches** - Don't ask us to pull from your master branch.
-- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
+- **Code style** — Run [Laravel Pint](https://laravel.com/docs/pint) before pushing. The repository uses the `laravel` preset configured in `pint.json`.
+- **Static analysis** — Code must pass [PHPStan](https://phpstan.org/) level 8 via [Larastan](https://github.com/larastan/larastan).
+- **Tests** — Patches must ship with [Pest](https://pestphp.com/) tests covering the change. Bug fixes should include a regression test.
+- **Documentation** — Update `README.md` and any relevant comments when behaviour changes.
+- **SemVer** — This project follows [SemVer v2.0.0](https://semver.org/). Avoid breaking the public API outside major releases.
+- **Feature branches** — Open pull requests from a feature branch, not from `master`.
+- **One change per pull request** — Smaller pull requests get reviewed faster.
+- **Tidy history** — Squash intermediate commits so each commit on the branch is meaningful.
 
-## Running Tests
+## Local quality checks
 
-``` bash
-$ phpunit
+```bash
+composer install
+
+composer format       # apply Pint fixes
+composer format:test  # check formatting without modifying files
+composer analyse      # PHPStan level 8
+composer test         # Pest test suite
 ```
 
-**Happy coding**!
+All four commands run in CI on every push and pull request — fixing them locally first saves a round-trip.
+
+**Happy coding!**
