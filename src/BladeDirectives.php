@@ -4,40 +4,52 @@ namespace mindtwo\Spaceless;
 
 class BladeDirectives
 {
-    public function spaceless()
+    /**
+     * Start a new output buffer for the @spaceless directive.
+     */
+    public function spaceless(): void
     {
-        if ($this->isEnabled()) {
-            ob_start();
+        if (! $this->isEnabled()) {
+            return;
         }
+
+        ob_start();
     }
 
     /**
-     * @return string|null
+     * Flush the active output buffer and strip whitespace between HTML tags.
      *
-     * @throws \Exception
+     * Whitespace is preserved inside any tag listed under
+     * `spaceless.expelled_tags` (e.g. <pre>, <script>, <style>, <textarea>).
      */
-    public function endSpaceless()
+    public function endSpaceless(): ?string
     {
-        if ($this->isEnabled()) {
-
-            $buffer = ob_get_clean();
-            $expelled_tags = implode('|', config('spaceless.expelled_tags', []));
-
-            $regexp = '~(?>[^\S]\s*|\s{2,})(?=[^<]*+(?:<(?!/?(?:' . $expelled_tags . ')\b)[^<]*+)*+(?:<(?>' . $expelled_tags . ')\b|\z))~Six';
-            $result = preg_replace($regexp, ' ', $buffer);
-            $result = str_replace('> <', '><', $result);
-
-            return ($result !== null) ? $result : $buffer;
+        if (! $this->isEnabled()) {
+            return null;
         }
 
-        return null;
+        $buffer = (string) ob_get_clean();
+
+        /** @var array<int, string> $expelledTags */
+        $expelledTags = (array) config('spaceless.expelled_tags', []);
+        $expelled = implode('|', $expelledTags);
+
+        $pattern = '~(?>[^\S]\s*|\s{2,})(?=[^<]*+(?:<(?!/?(?:'.$expelled.')\b)[^<]*+)*+(?:<(?>'.$expelled.')\b|\z))~Six';
+
+        $stripped = preg_replace($pattern, ' ', $buffer);
+
+        if ($stripped === null) {
+            return $buffer;
+        }
+
+        return str_replace('> <', '><', $stripped);
     }
 
     /**
-     * @return bool
+     * Determine if the spaceless directive is enabled.
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
-        return config('spaceless.enabled', true);
+        return (bool) config('spaceless.enabled', true);
     }
 }

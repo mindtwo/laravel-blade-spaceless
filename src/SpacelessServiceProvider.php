@@ -2,15 +2,15 @@
 
 namespace mindtwo\Spaceless;
 
-use Blade;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class SpacelessServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services
+     * Bootstrap any package services.
      */
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -18,28 +18,30 @@ class SpacelessServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $this->applyBladeDirectives();
+        $this->registerBladeDirectives();
     }
 
     /**
-     * Register any application services
-     *
-     * @return void
+     * Register any package services.
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/spaceless.php', 'spaceless');
+
         $this->app->singleton(BladeDirectives::class);
     }
 
-    public function applyBladeDirectives()
+    /**
+     * Register the @spaceless and @endspaceless Blade directives.
+     */
+    protected function registerBladeDirectives(): void
     {
-        Blade::directive('spaceless', function () {
-            return "<?php app('mindtwo\Spaceless\BladeDirectives')->spaceless() ?>";
+        Blade::directive('spaceless', function (): string {
+            return "<?php app('".BladeDirectives::class."')->spaceless(); ?>";
         });
 
-        Blade::directive('endspaceless', function () {
-            return "<?php echo app('mindtwo\Spaceless\BladeDirectives')->endSpaceless() ?>";
+        Blade::directive('endspaceless', function (): string {
+            return "<?php echo app('".BladeDirectives::class."')->endSpaceless(); ?>";
         });
     }
 }
