@@ -1,1 +1,12 @@
-vendor/
+/.claude
+/.idea
+/.phpunit.cache
+/.phpunit.result.cache
+/build
+/composer.lock
+/coverage
+/vendor
+.DS_Store
+.phpunit.cache
+.phpunit.result.cache
+.phpstan.cache

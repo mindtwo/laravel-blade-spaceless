@@ -1,4 +1,13 @@
-/.gitattributes       export-ignore
-/.gitignore           export-ignore
-/phpunit.xml.dist     export-ignore
-/tests                export-ignore
+* text=auto eol=lf
+
+/.github            export-ignore
+/tests              export-ignore
+/.editorconfig      export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/CONTRIBUTING.md    export-ignore
+/phpstan.neon       export-ignore
+/phpstan.neon.dist  export-ignore
+/phpunit.xml        export-ignore
+/phpunit.xml.dist   export-ignore
+/pint.json          export-ignore
